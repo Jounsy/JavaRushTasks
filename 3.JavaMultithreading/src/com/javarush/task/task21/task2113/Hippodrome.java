@@ -20,7 +20,19 @@ public class Hippodrome {
 
     private List<Horse> horses;
 
-   void run(){}
+   void run()
+   {
+       for(int i = 1;i<=100;i++)
+       {
+           try {
+               Thread.sleep(200);
+           } catch (InterruptedException e) {
+               e.printStackTrace();
+           }
+           move();
+           print();
+       }
+   }
    void move(){}
    void print(){}
     public static void main(String[] args) {
