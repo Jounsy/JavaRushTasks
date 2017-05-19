@@ -20,6 +20,9 @@ public class Hippodrome {
 
     private List<Horse> horses;
 
+   void run(){}
+   void move(){}
+   void print(){}
     public static void main(String[] args) {
         game = new Hippodrome(new ArrayList());
 
