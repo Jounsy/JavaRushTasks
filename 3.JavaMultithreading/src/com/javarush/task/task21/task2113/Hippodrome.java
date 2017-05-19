@@ -79,6 +79,6 @@ public class Hippodrome {
         game.getHorses().add(new Horse("Idea",3.0,0.0));
 
         game.run();
-
+        game.printWinner();
     }
 }
