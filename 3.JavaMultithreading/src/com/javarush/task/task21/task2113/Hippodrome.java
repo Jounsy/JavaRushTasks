@@ -40,7 +40,17 @@ public class Hippodrome {
            horsesList.move();
        }
    }
-   public void print(){}
+   public void print()
+   {
+       for (Horse horsesList: getHorses())
+       {
+           horsesList.print();
+       }
+       for (int i = 0;i<10;i++)
+       {
+           System.out.println();
+       }
+   }
     public static void main(String[] args) {
         game = new Hippodrome(new ArrayList());
 
