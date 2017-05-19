@@ -51,6 +51,26 @@ public class Hippodrome {
            System.out.println();
        }
    }
+   public Horse getWinner()
+   {
+       Horse winner = null;
+       int dotsCount = 0;
+
+       for (Horse horsesList: getHorses())
+       {
+          if ((int)horsesList.getDistance()>dotsCount)
+          {
+              winner = horsesList;
+              dotsCount = (int)horsesList.getDistance();
+          }
+       }
+       return winner;
+   }
+   public void printWinner()
+   {
+       System.out.println("Winner is " + getWinner().getName() + "!");
+   }
+
     public static void main(String[] args) {
         game = new Hippodrome(new ArrayList());
 
@@ -59,7 +79,6 @@ public class Hippodrome {
         game.getHorses().add(new Horse("Idea",3.0,0.0));
 
         game.run();
-
 
     }
 }
