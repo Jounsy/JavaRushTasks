@@ -33,8 +33,14 @@ public class Hippodrome {
            print();
        }
    }
-   void move(){}
-   void print(){}
+   public void move()
+   {
+       for (Horse horsesList: getHorses())
+       {
+           horsesList.move();
+       }
+   }
+   public void print(){}
     public static void main(String[] args) {
         game = new Hippodrome(new ArrayList());
 
