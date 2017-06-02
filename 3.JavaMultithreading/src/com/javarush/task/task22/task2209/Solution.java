@@ -1,144 +1,76 @@
 package com.javarush.task.task22.task2209;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Scanner;
 
-/*
-Составить цепочку слов
+/* Составить цепочку слов
+В методе main считайте с консоли имя файла, который содержит слова, разделенные пробелом.
+В методе getLine используя StringBuilder расставить все слова в таком порядке,
+чтобы последняя буква данного слова совпадала с первой буквой следующего не учитывая регистр.
+Каждое слово должно участвовать 1 раз.
+Метод getLine должен возвращать любой вариант.
+Слова разделять пробелом.
+Пример тела входного файла:
+Киев Нью-Йорк Амстердам Вена Мельбурн
+Результат:
+Амстердам Мельбурн Нью-Йорк Киев Вена
 */
-public class Solution {
- private static String argumentString;
- static List<StringBuilder> mainList;
- public static void main(String[] args) {
-        //...
-        BufferedReader readFileName = new BufferedReader(new InputStreamReader(System.in));
-        String fileName = null;
-        try {
-            fileName = readFileName.readLine();
-            readFileName.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
 
-        StringBuilder allWords = new StringBuilder();
-        BufferedReader fileReader = null;
-        try {
-            fileReader = new BufferedReader(new FileReader(fileName));
-            String oneString = null;
-            while((oneString = fileReader.readLine())!=null)
-            {
-                for(String oneWord: oneString.split(" "))
-                {
-                    allWords.append(oneWord + " ");
-                }
-            }
-            fileReader.close();
-        } catch (IOException e) {
-            e.printStackTrace();
+public class Solution {
+    public static void main(String[] args) throws IOException
+    {
+        //...
+        Scanner scanner = new Scanner(System.in);
+        String fileName = scanner.nextLine();
+        ArrayList<String> list = new ArrayList<>();
+        BufferedReader reader = new BufferedReader(new FileReader(fileName));
+        while (reader.ready())
+        {
+            String[] s = reader.readLine().split("\\s");
+            Collections.addAll(list, s);
         }
-        StringBuilder result = getLine((allWords.toString()).trim());
+        reader.close();
+        String[] words = new String[list.size()];
+        words = list.toArray(words);
+        StringBuilder result = getLine(words);
         System.out.println(result.toString());
+        scanner.close();
     }
 
     public static StringBuilder getLine(String... words)
     {
-        if(words == null || words.length==0)return new StringBuilder("");
-        if (words[0].equals("")) return new StringBuilder(words[0]);
+        ArrayList<String> strings  = new ArrayList<>();
+        Collections.addAll(strings, words);
+        StringBuilder sb = new StringBuilder();
+        if (strings.size() == 0)
+            return new StringBuilder();
 
-        argumentString = words[0];
-        mainList = new ArrayList<>();
-        mainList.add(new StringBuilder());
+        sb.append(strings.get(0));
+        strings.remove(0);
 
-        Set<String> wordsMain = splitString(Solution.argumentString);
-        Iterator<String> itrWordsMain = wordsMain.iterator();
+        while (strings.size()>0){
+            for (int i = 0; i < strings.size(); i++) {
+                String a = strings.get(i).toUpperCase().toLowerCase();
+                String b = sb.toString().toUpperCase().toLowerCase();
+                if (a.charAt(0) == b.charAt(sb.length() - 1))
+                { // в конец
+                    sb.append(" ").append(strings.get(i));
+                    strings.remove(i);
+                    continue;
+                }
 
-            while (itrWordsMain.hasNext()) {
-                String currentWord = itrWordsMain.next();
-
-               mainList.add(addWordsToReturningList(currentWord));
-                itrWordsMain.remove();
-            }
-
-         return findBiggestValueInMainList(mainList);
-    }
-
-    public static StringBuilder findBiggestValueInMainList(List mainList)
-    {
-        StringBuilder stringReturn = new StringBuilder();
-        for(Object biggest: mainList)
-        {
-            if(biggest.toString().length()>stringReturn.toString().length())
-            {
-                stringReturn = (StringBuilder)biggest;
-            }
-        }
-        return new StringBuilder(stringReturn);
-    }
-
-    public static String findBiggestStringInList(List<String> listWithWords)
-    {
-        String biggestString = "";
-        for(String string: listWithWords)
-        {
-            if(string.length()>biggestString.length()) biggestString = string;
-        }
-        return biggestString;
-    }
-
-    public static StringBuilder addWordsToReturningList(String currentWord)
-    {
-        List<String> addCurrentWithEqualsWords = new ArrayList<>();
-        addCurrentWithEqualsWords.add(currentWord);
-
-        TreeSet<String> wordsSet;
-        String localCurrentWord;
-        int countRecords = addCurrentWithEqualsWords.size();
-        for(int i = 0; i < countRecords;i++)
-        {
-            wordsSet =  splitString(Solution.argumentString);
-
-            localCurrentWord = addCurrentWithEqualsWords.get(i);
-            wordsSet = clearCurrentSet(localCurrentWord,wordsSet);
-            Iterator<String> itrWordaSet = wordsSet.iterator();
-            while(itrWordaSet.hasNext())
-            {
-                String nextWord = itrWordaSet.next();
-                if (cutLastCharacter(localCurrentWord).equals(cutFirstCharacter(nextWord)))
-                {
-                    addCurrentWithEqualsWords.add(localCurrentWord + " " + nextWord);
-                    countRecords++;
-                    itrWordaSet.remove();
+                if (b.charAt(0) == a.charAt(a.length() - 1))
+                { //в начало
+                    sb.insert(0, " ");
+                    sb.insert(0, strings.get(i));
+                    strings.remove(i);
                 }
             }
-
         }
-        return new StringBuilder(findBiggestStringInList(addCurrentWithEqualsWords));
-    }
-
-    private static TreeSet clearCurrentSet(String localCurrentWord, TreeSet<String> wordsSet) {
-     TreeSet<String> clearWords = splitString(localCurrentWord);
-     for (String words: clearWords)
-     {
-         wordsSet.remove(words);
-     }
-     return wordsSet;
-    }
-
-    public static String cutLastCharacter(String word){
-        String lastCharacter = word.substring(word.length()-1);
-        return lastCharacter.toLowerCase();
-    }
-    public static String cutFirstCharacter(String word){
-        String firstCharacter = word.substring(0,word.length()-(word.length()-1));
-        return firstCharacter.toLowerCase();
-    }
-    public static TreeSet<String> splitString(String string)
-    {
-        TreeSet<String> wordsList = new TreeSet<>();
-
-        for (String oneWord : string.split(" ")) {
-            wordsList.add(oneWord);
-        }
-        return wordsList;
+        return sb;
     }
 }
