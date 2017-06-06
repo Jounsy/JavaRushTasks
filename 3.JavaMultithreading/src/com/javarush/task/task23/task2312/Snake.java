@@ -37,17 +37,6 @@ public class Snake {
     public Snake(int x, int y){
         sections = new ArrayList<>();
         sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
-        sections.add(new SnakeSection(x,y));
 
 
         isAlive = true;
