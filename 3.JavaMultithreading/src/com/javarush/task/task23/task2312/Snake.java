@@ -33,7 +33,8 @@ import java.util.List;
 4. В классе Snake должен быть создан метод move.
  */
 public class Snake {
-    public Snake(int x,int y){
+
+    public Snake(int x, int y){
         sections = new ArrayList<>();
         sections.add(new SnakeSection(x,y));
         isAlive = true;
