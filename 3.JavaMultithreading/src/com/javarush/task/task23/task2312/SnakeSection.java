@@ -1,14 +1,11 @@
 package com.javarush.task.task23.task2312;
 
-/**
- * Created by Work-TESTER on 06.06.2017.
- */
-/*
-
- */
 public class SnakeSection {
-    private int x,y;
-    public SnakeSection(int x, int y){
+    private int x;
+    private int y;
+
+
+    public SnakeSection(int x, int y) {
         this.x = x;
         this.y = y;
     }

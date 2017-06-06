@@ -1,20 +1,19 @@
 package com.javarush.task.task23.task2312;
 
-/**
- * Created by Work-TESTER on 06.06.2017.
- */
 public class Mouse {
-   private int x,y;
-   public Mouse(int x, int y)
-   {
-      this.x = x;
-      this.y = y;
-   }
-   public int getX() {
-      return x;
-   }
+    private int x;
+    private int y;
 
-   public int getY() {
-      return y;
-   }
+    public Mouse(int x, int y) {
+        this.x = x;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
 }
