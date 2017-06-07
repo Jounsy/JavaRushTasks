@@ -148,6 +148,7 @@ public class Room {
         game.snake.setDirection(SnakeDirection.DOWN);
         game.createMouse();
         game.run();
+
     }
 
 
