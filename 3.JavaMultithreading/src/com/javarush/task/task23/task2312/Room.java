@@ -2,6 +2,7 @@ package com.javarush.task.task23.task2312;
 
 
 import java.awt.event.KeyEvent;
+import java.util.ArrayList;
 
 /**
  * Основной класс программы.
@@ -95,43 +96,31 @@ public class Room {
      */
     public void print() {
         //Создаем массив, куда будем "рисовать" текущее состояние игры
-        int[][] frame = new int[height][width];
+        int[][] matrix = new int[height][width];
+
         //Рисуем все кусочки змеи
-        int snakeHeadX = snake.getSections().get(0).getX();
-        int snakeHeadY = snake.getSections().get(0).getY();
-        int snakeBodyX;
-        int snakeBodyY;
-        frame[snakeHeadY][snakeHeadX] = 2;
-
-        if(snake.getSections().size() > 1) {
-            for (int i = 1; i < snake.getSections().size(); i++) {
-                snakeBodyX = snake.getSections().get(i).getX();
-                snakeBodyY = snake.getSections().get(i).getY();
-                frame[snakeBodyY][snakeBodyX] = 1;
-            }
+        ArrayList<SnakeSection> sections = new ArrayList<SnakeSection>(snake.getSections());
+        for (SnakeSection snakeSection : sections) {
+            matrix[snakeSection.getY()][snakeSection.getX()] = 1;
         }
+
+        //Рисуем голову змеи (4 - если змея мертвая)
+        matrix[snake.getY()][snake.getX()] = snake.isAlive() ? 2 : 4;
+
         //Рисуем мышь
-        int mouseBodyX = mouse.getX();
-        int mouseBodyY = mouse.getY();
+        matrix[mouse.getY()][mouse.getX()] = 3;
 
-        frame[mouseBodyY][mouseBodyX] = 3;
         //Выводим все это на экран
-        for(int i = 0; i < height;i++)
-        {
-            StringBuilder line = new StringBuilder();
-            for(int j = 0; j < width;j++)
-            {
-                String znak = "";
-                if(frame[i][j]==3) {znak = "^";}
-                if(frame[i][j]==2) {znak = "X";}
-                if(frame[i][j]==1) {znak = "x";}
-                if(frame[i][j]==0) {znak = ".";}
-
-                line.append(znak);
+        String[] symbols = {" . ", " x ", " X ", "^_^", "RIP"};
+        for (int y = 0; y < height; y++) {
+            for (int x = 0; x < width; x++) {
+                System.out.print(symbols[matrix[y][x]]);
             }
-
-            System.out.println(line.toString());
+            System.out.println();
         }
+        System.out.println();
+        System.out.println();
+        System.out.println();
     }
 
     /**
@@ -162,26 +151,18 @@ public class Room {
     }
 
 
+    private int initialDelay = 520;
+    private int delayStep = 20;
+
     /**
      * Программа делает паузу, длинна которой зависит от длинны змеи.
      */
-    public void sleep()  {
-        int level = snake.getSections().size()-1;
-        long sleepTime = 0;
-        if (level == 0){sleepTime = 500;}
-        if (level >=1 && level <= 10){
-            sleepTime = 500-200*(level-1)/9;
-         }
-        if (level>10 && level<=15){
-            sleepTime = 300-100*(level-10)/5;
-        }
-        if (level>15){
-            sleepTime = 200;
-        }
+    public void sleep() {
         try {
-            Thread.sleep(sleepTime);
+            int level = snake.getSections().size();
+            int delay = level < 15 ? (initialDelay - delayStep * level) : 200;
+            Thread.sleep(delay);
         } catch (InterruptedException e) {
-            e.printStackTrace();
         }
     }
 }
