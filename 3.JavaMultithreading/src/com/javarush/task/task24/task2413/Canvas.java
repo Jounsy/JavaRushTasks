@@ -30,6 +30,20 @@ public class Canvas {
             }
         }
     }
+    public void clear(){
+        matrix = new char[height+2][width+2];
+    }
+
+    public void print(){
+        for(int i = 0; i < matrix.length; i++){
+            for(int j = 0;j < matrix[0].length; j++) {
+                if (matrix[i][j] != 0) {
+                    System.out.print(matrix[i][j]);
+                }
+            }
+            System.out.println();
+        }
+    }
 
     public int getWidth() {
         return width;
