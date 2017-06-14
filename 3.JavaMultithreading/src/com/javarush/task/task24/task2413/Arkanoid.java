@@ -21,7 +21,19 @@ public class Arkanoid {
     public static void main(String[] args) {
 
     }
-    public void move(){}
+    public void move(){
+        ball.move();
+        stand.move();
+    }
+
+    public void draw(Canvas canvas){
+        ball.draw(canvas);
+        stand.draw(canvas);
+        for(Brick eachBrick: bricks)
+         {
+           eachBrick.draw(canvas);
+         }
+    }
 
     public void run(){}
 
