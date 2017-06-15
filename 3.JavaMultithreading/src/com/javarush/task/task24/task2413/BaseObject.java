@@ -12,7 +12,7 @@ public abstract class BaseObject {
         this.y = y;
         this.radius = radius;
     }
-    boolean isIntersec(BaseObject o){
+        public boolean isIntersec(BaseObject o){
         boolean isCheck;
         double dx = x - o.x;
         double dy = y - o.y;
