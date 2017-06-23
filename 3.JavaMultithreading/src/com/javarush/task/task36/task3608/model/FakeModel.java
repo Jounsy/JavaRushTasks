@@ -33,6 +33,11 @@ public class FakeModel implements Model {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void loadUserById(long userId) {
+        throw new UnsupportedOperationException();
+    }
+
 
 //    public static void main(String[] args) {
 //        FakeModel fakeModel = new FakeModel();

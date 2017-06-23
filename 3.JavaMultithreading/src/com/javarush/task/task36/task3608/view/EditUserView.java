@@ -23,20 +23,20 @@ public class EditUserView implements View{
 
     @Override
     public void refresh(ModelData modelData) {
-        StringBuilder makeString = new StringBuilder("User to be edited:");
+        StringBuilder makeStringEdit = new StringBuilder("User to be edited:");
 
-        makeString.append("\n\t" + modelData.getActiveUser());
+        makeStringEdit.append("\n\t" + modelData.getActiveUser());
 
-        makeString.append("\n===================================================");
-        System.out.println(makeString.toString());
+        makeStringEdit.append("\n===================================================");
+        System.out.println(makeStringEdit.toString());
     }
 
 
 
-    public void fireEventShowAllUsers(){
-        controller.onShowAllUsers();
-    }
-    public void fireEventShowDeletedUsers() {
-        controller.onShowAllDeletedUsers();
-    }
+//    public void fireEventShowAllUsers(){
+//        controller.onShowAllUsers();
+//    }
+//    public void fireEventShowDeletedUsers() {
+//        controller.onShowAllDeletedUsers();
+//    }
 }
