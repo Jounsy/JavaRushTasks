@@ -33,4 +33,8 @@ public class MainModel implements Model {
         modelData.setUsers(users);
 
     }
+    public void loadDeletedUsers() {
+        List<User> users = userService.getAllDeletedUsers();
+        modelData.setUsers(users);
+    }
 }
