@@ -29,9 +29,9 @@ public class FakeModel implements Model {
     }
 
 
-    public static void main(String[] args) {
-        FakeModel fakeModel = new FakeModel();
-        fakeModel.loadUsers();
+//    public static void main(String[] args) {
+//        FakeModel fakeModel = new FakeModel();
+//        fakeModel.loadUsers();
         //
-    }
+   // }
 }
