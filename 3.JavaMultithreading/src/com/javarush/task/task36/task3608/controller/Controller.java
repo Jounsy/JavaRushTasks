@@ -47,4 +47,11 @@ public class Controller {
         usersView.refresh(model.getModelData());
        // editUserView.refresh(model.getModelData()); //не проходит валидацию не трогать
     }
+    public void onUserChange(String name, long id, int level){
+        model.changeUserData(name, id, level);
+        editUserView.refresh(model.getModelData());
+        usersView.refresh(model.getModelData());
+
+        //отобразить список доделать
+    }
 }
