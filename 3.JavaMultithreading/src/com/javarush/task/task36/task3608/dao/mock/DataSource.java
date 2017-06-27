@@ -20,7 +20,7 @@ public class DataSource {
         add(new User("Petrov", 124l, 2));
         add(new User("Petrov", 125l, 1));
         add(new User("Sidorov", 126l, 2));
-        add(new User("Morokov (deleted)", 127l, 25));
+
     }};
 
     private long maxUserId = 126l;

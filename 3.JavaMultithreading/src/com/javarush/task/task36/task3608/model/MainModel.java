@@ -1,5 +1,6 @@
 package com.javarush.task.task36.task3608.model;
 
+import com.javarush.task.task36.task3608.Util;
 import com.javarush.task.task36.task3608.bean.User;
 import com.javarush.task.task36.task3608.model.service.UserService;
 import com.javarush.task.task36.task3608.model.service.UserServiceImpl;
@@ -11,12 +12,10 @@ import java.util.List;
  * Created by Work-TESTER on 23.06.2017.
  */
 public class MainModel implements Model {
+
     private ModelData modelData = new ModelData();
 
-
-
     private UserService userService = new UserServiceImpl();
-
 
     @Override
     public ModelData getModelData() {
@@ -29,7 +28,7 @@ public class MainModel implements Model {
     @Override
     public void loadUsers() {
 
-        List<User> users = userService.getUsersBetweenLevels(1,100);
+        List<User> users = userService.filterOnlyActiveUsers(userService.getUsersBetweenLevels(1,100));
         modelData.setUsers(users);
         modelData.setDisplayDeletedUserList(false);
 
@@ -43,4 +42,20 @@ public class MainModel implements Model {
         User user = userService.getUsersById(userId);
         modelData.setActiveUser(user); //юзер иквалс айди
     }
+
+    @Override
+    public void deleteUserById(long userId) {
+        User user = userService.deleteUser(userId);
+        modelData.setDisplayDeletedUserList(false); //?
+        modelData.setUsers(getAllUsers());
+    }
+
+    private List<User> getAllUsers(){
+        return userService.filterOnlyActiveUsers(userService.getUsersBetweenLevels(1,100));
+    }
+
+    List<User> filterOnlyActiveUsers(List<User> allUsers){
+        return null;
+    }
+
 }
