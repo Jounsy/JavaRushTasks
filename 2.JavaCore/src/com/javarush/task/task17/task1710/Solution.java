@@ -23,4 +23,12 @@ public class Solution {
 
 
     }
+
+ public class Test {
+        private Test(){}
+ }
+ public class Test2 extends Test {
+
+ }
+
 }
