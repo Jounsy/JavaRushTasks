@@ -6,7 +6,7 @@ import java.util.List;
 
 public class Human implements Alive{
 
-    //public Human(){}
+
     public Human(String name,int age) {
         this.age = age;
         this.name = name;
@@ -21,8 +21,6 @@ public class Human implements Alive{
 
     protected int[] size;
 
-
-
     public static final int FIRST = 1;
     public static final int SECOND = 2;
     public static final int THIRD = 3;
@@ -36,12 +34,6 @@ public class Human implements Alive{
     public int getBloodGroup() {
         return bloodGroup;
     }
-
-//    public Human(boolean isSoldier) {
-//        this.isSoldier = isSoldier;
-//        this.id = nextId;
-//        nextId++;
-//    }
 
     public int getAge() {
         return age;
@@ -58,15 +50,6 @@ public class Human implements Alive{
     public void setName(String name) {
         this.name = name;
     }
-
-
-
-//    public void live() {
-//        if (isSoldier)
-//            fight();
-//    }
-
-
 
     public int getId() {
         return id;
@@ -92,7 +75,13 @@ public class Human implements Alive{
     }
 
     @Override
-    public void live() {
+    public void live() {}
 
+    public void printData() {
+        System.out.println(getPosition() + ": " + name);
+    }
+
+   public String getPosition(){
+        return "Человек";
     }
 }

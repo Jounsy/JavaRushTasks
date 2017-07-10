@@ -7,12 +7,11 @@ import java.util.List;
 public class Student extends UniversityPerson  {
 
     private double averageGrade;
-    //private String university;
     private Date beginningOfSession;
     private Date endOfSession;
     private int course;
     public Student(String name, int age, double averageGrade) {
-       // super(false);
+
         super(name,age);
 
         this.averageGrade = averageGrade;
@@ -26,17 +25,11 @@ public class Student extends UniversityPerson  {
     public void learn() {
     }
 
-//    public String getUniversity() {
-//        return university;
-//    }
-//
-//    public void setUniversity(String university) {
-//        this.university = university;
-//    }
 
-    public void printData() {
-        System.out.println("Студент: " + name);
-    }
+
+    //    public void printData() {
+//        System.out.println("Студент: " + name);
+//    }
 
     public void incAverageGradeBy01() {
         averageGrade += 0.1;
@@ -71,5 +64,10 @@ public class Student extends UniversityPerson  {
 
     public int getCourse() {
         return course;
+    }
+
+    @Override
+   public String getPosition() {
+        return "Студент";
     }
 }

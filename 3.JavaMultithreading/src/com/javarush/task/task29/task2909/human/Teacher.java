@@ -6,14 +6,13 @@ import java.util.List;
 public class Teacher extends UniversityPerson{
 
     private int numberOfStudents;
-   // private String university;
+
 
     public Teacher(String name, int age, int numberOfStudents) {
         super(name, age);
 
         this.numberOfStudents = numberOfStudents;
     }
-
 
 
     public void live() {
@@ -23,15 +22,13 @@ public class Teacher extends UniversityPerson{
     public void teach() {
     }
 
-//    public String getUniversity() {
-//        return university;
-//    }
-//
-//    public void setUniversity(String university) {
-//        this.university = university;
+
+//    public void printData() {
+//        System.out.println("Преподаватель: " + name);
 //    }
 
-    public void printData() {
-        System.out.println("Преподаватель: " + name);
+    @Override
+   public String getPosition() {
+        return "Преподаватель";
     }
 }
