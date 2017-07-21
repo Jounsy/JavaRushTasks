@@ -24,6 +24,5 @@ public class Solution {
         Thread.sleep(2000);
 
         executorService.shutdownNow();
-
     }
 }

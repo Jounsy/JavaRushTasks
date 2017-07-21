@@ -2,6 +2,7 @@ package com.javarush.task.task26.task2610;
 
 import java.util.concurrent.BlockingQueue;
 
+
 public class Producer implements Runnable {
     private BlockingQueue queue;
 
