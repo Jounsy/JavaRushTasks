@@ -51,5 +51,26 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
         public Handler(Socket socket){
             this.socket = socket;
         }
+
+
+        private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException{
+
+            while (true) {
+            connection.send(new Message(MessageType.NAME_REQUEST));
+            Message message = connection.receive();
+
+                if(message.getType()==MessageType.USER_NAME){
+                    String userName = message.getData();
+                    if(!userName.isEmpty() && userName!=null && !connectionMap.containsKey(userName)){
+                        connectionMap.put(userName,connection);
+                        connection.send(new Message(MessageType.NAME_ACCEPTED));
+                        return userName;
+                    }
+
+                }
+            }
+
+//            return null;
+        }
     }
 }
