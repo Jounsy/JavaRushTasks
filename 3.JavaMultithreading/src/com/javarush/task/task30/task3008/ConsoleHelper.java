@@ -1,17 +1,15 @@
 package com.javarush.task.task30.task3008;
 
-import com.sun.org.apache.xpath.internal.operations.Bool;
-
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
 /**
- * Created by Work-TESTER on 26.07.2017.
- * Метод readString должен перехватывать IOException, выводить сообщение о некорректном вводе и повторять считывание с консоли.!!!!
+ * Created by Work-TESTER on 28.07.2017.
  */
 public class ConsoleHelper {
-  static private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
+
+    static private BufferedReader reader = new BufferedReader(new InputStreamReader(System.in));
 
     static public void writeMessage(String message){
 
@@ -59,4 +57,5 @@ public class ConsoleHelper {
         } while (!isReadInt);
         return (int)readingInt;
     }
+
 }

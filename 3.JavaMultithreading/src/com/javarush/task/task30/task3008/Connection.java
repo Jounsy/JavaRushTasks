@@ -8,9 +8,9 @@ import java.net.Socket;
 import java.net.SocketAddress;
 
 /**
- * Created by Work-TESTER on 26.07.2017.
+ * Created by Work-TESTER on 28.07.2017.
  */
-public class Connection implements Closeable{
+public class Connection implements Closeable {
     private final Socket socket;
     private final ObjectOutputStream out;
     private final ObjectInputStream in;

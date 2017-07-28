@@ -3,12 +3,12 @@ package com.javarush.task.task30.task3008;
 import java.io.Serializable;
 
 /**
- * Created by Work-TESTER on 26.07.2017.
+ * Created by Work-TESTER on 28.07.2017.
  */
 public class Message implements Serializable {
 
-   private final MessageType type;
-   private final String data;
+    private final MessageType type;
+    private final String data;
 
     public Message(MessageType type) {
         this.type = type;
@@ -28,3 +28,4 @@ public class Message implements Serializable {
         return data;
     }
 }
+
