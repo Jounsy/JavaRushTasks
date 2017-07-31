@@ -31,8 +31,7 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
 
 
     }
-
-    public static void sendBroadcastMessage(Message message){
+        public static void sendBroadcastMessage(Message message){
 
         for(Map.Entry<String,Connection> entry: connectionMap.entrySet()){
             if(entry.getKey()!=null){
@@ -69,8 +68,15 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
 
                 }
             }
+        }
 
-//            return null;
+        private void sendListOfUsers(Connection connection, String userName) throws IOException{
+            for(Map.Entry<String,Connection> entry: connectionMap.entrySet()){
+                if(userName!=entry.getKey()){
+                    connection.send(new Message(MessageType.USER_ADDED, entry.getKey()));
+                }
+            }
+
         }
     }
 }
