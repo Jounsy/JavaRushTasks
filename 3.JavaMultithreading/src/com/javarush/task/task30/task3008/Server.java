@@ -51,7 +51,6 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
             this.socket = socket;
         }
 
-
         private String serverHandshake(Connection connection) throws IOException, ClassNotFoundException{
 
             while (true) {
@@ -71,6 +70,7 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
         }
 
         private void sendListOfUsers(Connection connection, String userName) throws IOException{
+
             for(Map.Entry<String,Connection> entry: connectionMap.entrySet()){
                 if(userName!=entry.getKey()){
                     connection.send(new Message(MessageType.USER_ADDED, entry.getKey()));
@@ -80,9 +80,11 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
         }
 
         private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException{
+
             while (true) {
                 Message message = connection.receive();
                 String messageText = null;
+
                 if(message.getType() == MessageType.TEXT){
                     messageText = userName + ": " + message.getData();
                     sendBroadcastMessage(new Message(MessageType.TEXT,messageText));
@@ -91,6 +93,35 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
                     ConsoleHelper.writeMessage("Сообщение не ТЕКСТ");
                 }
             }
+        }
+
+        public void run(){
+
+            Connection connection = null;
+            String userName = null;
+            ConsoleHelper.writeMessage("Установлено новое соединение с удаленным адресом " + socket.getRemoteSocketAddress());
+            try {
+                connection = new Connection(socket);
+                userName =  serverHandshake(connection);
+                sendBroadcastMessage(new Message(MessageType.USER_ADDED, userName));
+                sendListOfUsers(connection, userName);
+                serverMainLoop(connection,userName);
+            } catch (IOException e) {
+                ConsoleHelper.writeMessage("Произошла ошибка при обмене данными с удаленным сервером");
+            } catch (ClassNotFoundException e) {
+                ConsoleHelper.writeMessage("Произошла ошибка при обмене данными с удаленным сервером");
+            }
+            if (userName!=null){
+                connectionMap.remove(userName);
+                sendBroadcastMessage(new Message(MessageType.USER_REMOVED, userName));
+                ConsoleHelper.writeMessage("Соединение с удаленным сервером закрыто " + connection.getRemoteSocketAddress());
+            }
+
+
+
+
+
+
         }
 
     }
