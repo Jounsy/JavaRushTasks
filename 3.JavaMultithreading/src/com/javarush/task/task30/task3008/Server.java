@@ -78,5 +78,20 @@ private static Map<String,Connection> connectionMap = new ConcurrentHashMap<>();
             }
 
         }
+
+        private void serverMainLoop(Connection connection, String userName) throws IOException, ClassNotFoundException{
+            while (true) {
+                Message message = connection.receive();
+                String messageText = null;
+                if(message.getType() == MessageType.TEXT){
+                    messageText = userName + ": " + message.getData();
+                    sendBroadcastMessage(new Message(MessageType.TEXT,messageText));
+                }
+                else{
+                    ConsoleHelper.writeMessage("Сообщение не ТЕКСТ");
+                }
+            }
+        }
+
     }
 }
