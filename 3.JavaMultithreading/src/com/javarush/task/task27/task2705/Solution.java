@@ -13,12 +13,7 @@ public class Solution {
     }
 
     public void secondMethod() {
-
-            synchronized (lock) {
-                synchronized (this) {
-                doSomething();
-            }
-        }
+        doSomething();
     }
 
     private void doSomething() {
